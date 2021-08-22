@@ -12,6 +12,24 @@ Run Species Web locally:
 docker compose up -f local.yml
 ```
 
+Then go to <http://127.0.0.1:8000/> in your browser.
+
+## Technologies
+
+Here is the tech stack used to help create Species Web
+
+- [Docker](https://www.docker.com/)
+- [Django](https://www.djangoproject.com/)
+- [Python](https://www.python.org/)
+
+### Python libraries
+
+Here are the various Python libraries used for SpeciesWeb:
+
+### Local Scripts
+
+Useful scripts
+
 Run Python type checks:
 
 ```sh

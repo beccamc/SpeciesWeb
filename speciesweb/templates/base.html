@@ -77,6 +77,12 @@
                 <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
               </li>
             {% endif %}
+
+            <li>
+              <input type="search" id="site-search" name="q"
+                    aria-label="Search through site content">
+              <button>Search</button>
+            </li>
           </ul>
         </div>
       </nav>
