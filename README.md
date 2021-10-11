@@ -9,7 +9,7 @@ Species Web was scaffoled using the [Cookiecutter Django template](https://githu
 Run Species Web locally:
 
 ```sh
-docker compose up -f local.yml
+docker compose -f local.yml up
 ```
 
 Then go to <http://127.0.0.1:8000/> in your browser.
