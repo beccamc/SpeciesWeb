@@ -4,42 +4,13 @@ A platform for researchers & scientists filled with data & statistics on the wor
 
 ## Development
 
-Species Web was scaffoled using the [Cookiecutter Django template](https://github.com/pydanny/cookiecutter-django)
+### Prereqs
 
-Run Species Web locally:
-
-```sh
-docker compose -f local.yml up
-```
-
-Then go to <http://127.0.0.1:8000/> in your browser.
-
-## Technologies
-
-Here is the tech stack used to help create Species Web
-
+- [Visual Studio](https://visualstudio.microsoft.com/)
+- [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet/3.1)
+- [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)
 - [Docker](https://www.docker.com/)
-- [Django](https://www.djangoproject.com/)
-- [Python](https://www.python.org/)
 
-### Python libraries
+### Local development
 
-Here are the various Python libraries used for SpeciesWeb:
-
-### Local Scripts
-
-Useful scripts
-
-Run Python type checks:
-
-```sh
-mypy speciesweb
-```
-
-Run tests, check test coverage, and generate an HTML report:
-
-```sh
-coverage run -m pytest
-coverage html
-open htmlcov/index.html
-```
+To run the project. Start the Docker container via the CLI or within Visual Studio. (2019 or higher) It will open up a website at <https://localhost:49159/>.
