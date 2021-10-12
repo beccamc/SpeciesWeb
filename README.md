@@ -7,7 +7,7 @@ A platform for researchers & scientists filled with data & statistics on the wor
 ### Prereqs
 
 - [Visual Studio](https://visualstudio.microsoft.com/)
-- [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet/3.1)
+- [.NET 5](https://dotnet.microsoft.com/download/dotnet/5.0)
 - [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)
 - [Docker](https://www.docker.com/)
 
