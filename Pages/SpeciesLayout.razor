@@ -1,4 +1,9 @@
 ﻿@page "/specieslayout"
+@using SpeciesWeb.Data
+@using System.Text.Json
+@using System.Text
+@inject IJSRuntime JS
+
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -28,7 +33,7 @@
 <div class="d-flex">
     <h2 class="p-2">Information</h2>
     @*<svg class="icon ml-auto p-2" viewBox="0 0 8 8"><use class="icon-download-btn" xlink:href="#data-transfer-download"></use></svg>*@
-    <button type="button" class="ml-auto p-2 btn btn-primary">Download</button>
+    <button type="button" class="ml-auto p-2 btn btn-primary" @onclick="@DownloadFile">Download</button>
     <button type="button" class="p-2 btn btn-warning">Edit</button>
 </div>
 <table class="table">
@@ -61,3 +66,23 @@
         </tr>
     </tbody>
 </table>
+
+
+@functions {
+
+    async Task DownloadFile()
+    {
+        var testObj = new SpeciesData();
+        testObj.Summary = "Lorem Ipsum";
+
+        var fileName = "testing.txt";
+
+        var serializedObject = JsonSerializer.Serialize(testObj);
+        byte[] bytes = Encoding.UTF8.GetBytes(serializedObject);
+
+        await JS.InvokeAsync<object>(
+        "saveAsFile",
+        fileName,
+        Convert.ToBase64String(bytes));
+    }
+}
