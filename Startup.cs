@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.VisualStudio.Web.BrowserLink;
 using SpeciesWeb.Data;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,12 @@ namespace SpeciesWeb
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            IMvcBuilder builder = services.AddRazorPages();
+
+            #if DEBUG
+            builder.AddRazorRuntimeCompilation();
+            #endif
+
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
         }
@@ -37,6 +43,8 @@ namespace SpeciesWeb
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
+                
             }
             else
             {
