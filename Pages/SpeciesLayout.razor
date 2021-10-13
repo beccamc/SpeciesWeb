@@ -70,7 +70,7 @@
 
 @functions {
 
-    async Task DownloadFile()
+    async void DownloadFile()
     {
         var testObj = new SpeciesData();
         testObj.Summary = "Lorem Ipsum";
@@ -80,9 +80,6 @@
         var serializedObject = JsonSerializer.Serialize(testObj);
         byte[] bytes = Encoding.UTF8.GetBytes(serializedObject);
 
-        await JS.InvokeAsync<object>(
-        "saveAsFile",
-        fileName,
-        Convert.ToBase64String(bytes));
+        // return System.IO.File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
     }
 }
