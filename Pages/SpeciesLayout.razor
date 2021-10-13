@@ -2,7 +2,15 @@
 @using SpeciesWeb.Data
 @using System.Text.Json
 @using System.Text
+@using Microsoft.AspNetCore.Mvc.RazorPages
 @inject IJSRuntime JS
+
+@{
+    var testObj = new SpeciesData();
+    testObj.Summary = "Lorem ipsum";
+    var jsonstr = System.Text.Json.JsonSerializer.Serialize(testObj);
+    byte[] byteArray = System.Text.Encoding.ASCII.GetBytes(jsonstr);
+}
 
 
 <nav aria-label="breadcrumb">
@@ -33,7 +41,8 @@
 <div class="d-flex">
     <h2 class="p-2">Information</h2>
     @*<svg class="icon ml-auto p-2" viewBox="0 0 8 8"><use class="icon-download-btn" xlink:href="#data-transfer-download"></use></svg>*@
-    <button type="button" class="ml-auto p-2 btn btn-primary" @onclick="@DownloadFile">Download</button>
+    @*<button type="button" class="p-2 btn btn-warning" @onclick=@DownloadFile>Download</button>*@
+    <a class="form-control btn btn-primary" href="/download" asp-all-route-data="byteArray">Download</a>
     <button type="button" class="p-2 btn btn-warning">Edit</button>
 </div>
 <table class="table">
@@ -67,19 +76,10 @@
     </tbody>
 </table>
 
-
 @functions {
-
-    async void DownloadFile()
+    void DownloadFile()
     {
         var testObj = new SpeciesData();
-        testObj.Summary = "Lorem Ipsum";
-
-        var fileName = "testing.txt";
-
-        var serializedObject = JsonSerializer.Serialize(testObj);
-        byte[] bytes = Encoding.UTF8.GetBytes(serializedObject);
-
-        // return System.IO.File(bytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        testObj.Summary = "Lorem ipsum";
     }
 }
