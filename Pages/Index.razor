@@ -99,8 +99,8 @@
         {
             Label = "Species in Database",
             Data = RandomizeData(),
-            BackgroundColor = backgroundColors,
-            BorderColor = borderColors,
+            BackgroundColor = speciesBackgroundColors,
+            BorderColor = speciesBorderColors,
         };
     }
 
@@ -111,16 +111,47 @@
         {
             Label = "Species by IUCN Classification",
             Data = RandomizeData(),
-            BackgroundColor = backgroundColors,
-            BorderColor = borderColors
+            BackgroundColor = iucnBackgroundColors,
+            BorderColor = iucnBorderColors
         };
     }
 
     string[] groupLabels = { "Amphibians", "Birds", "Fish", "Invertebrates", "Mammals", "Plants", "Reptiles" };
-    List<string> backgroundColors = new List<string> { ChartColor.FromRgba( 255, 99, 132, 0.2f ), ChartColor.FromRgba( 54, 162, 235, 0.2f ), ChartColor.FromRgba( 255, 206, 86, 0.2f ), ChartColor.FromRgba( 75, 192, 192, 0.2f ), ChartColor.FromRgba( 153, 102, 255, 0.2f ), ChartColor.FromRgba( 255, 159, 64, 0.2f ), ChartColor.FromRgba( 200, 100, 64, 0.2f ) };
-    List<string> borderColors = new List<string> { ChartColor.FromRgba( 255, 99, 132, 1f ), ChartColor.FromRgba( 54, 162, 235, 1f ), ChartColor.FromRgba( 255, 206, 86, 1f ), ChartColor.FromRgba( 75, 192, 192, 1f ), ChartColor.FromRgba( 153, 102, 255, 1f ), ChartColor.FromRgba( 255, 159, 64, 1f ),  ChartColor.FromRgba( 200, 100, 64, 1f ) };
+        List<string> speciesBackgroundColors = new List<string> { 
+        ChartColor.FromRgba( 255, 255, 60, 0.2f ), // Yellow
+        ChartColor.FromRgba( 255, 175, 60, 0.2f ), // Orange
+        ChartColor.FromRgba( 60, 100, 200, 0.2f ), // Blue
+        ChartColor.FromRgba( 255, 0, 0, 0.2f ), // Red
+        ChartColor.FromRgba( 100, 100, 0, 0.2f ), // Dark Red
+        ChartColor.FromRgba( 0, 255, 95, 0.2f ), // Green
+        ChartColor.FromRgba( 0, 0, 0, 0.2f ) }; // Black
+    List<string> speciesBorderColors = new List<string> { 
+        ChartColor.FromRgba( 200, 255, 60, 1f ), // Yellow
+        ChartColor.FromRgba( 255, 100, 60, 1f ), // Orange
+        ChartColor.FromRgba( 60, 100, 200, 1f ), // Blue
+        ChartColor.FromRgba( 255, 0, 0, 1f ), // Red
+        ChartColor.FromRgba( 100, 100, 0, 1f ), // Dark Red
+        ChartColor.FromRgba( 0, 255, 95, 1f ), // Green
+        ChartColor.FromRgba( 0, 0, 0, 1f ) }; // Black
+
 
     string[] iucnLabels = { "Least Concern", "Near Threatened", "Vulnerable", "Endangered", "Critically Endangered", "Extinct in the Wild", "Extinct" };
+    List<string> iucnBackgroundColors = new List<string> { 
+        ChartColor.FromRgba( 0, 255, 95, 0.2f ), // Green
+        ChartColor.FromRgba( 60, 100, 200, 0.2f ), // Blue
+        ChartColor.FromRgba( 255, 255, 60, 0.2f ), // Yellow
+        ChartColor.FromRgba( 255, 175, 60, 0.2f ), // Orange
+        ChartColor.FromRgba( 255, 0, 0, 0.2f ), // Red
+        ChartColor.FromRgba( 115, 0, 0, 0.2f ), // Dark Red
+        ChartColor.FromRgba( 0, 0, 0, 0.2f ) }; // Black
+    List<string> iucnBorderColors = new List<string> { 
+        ChartColor.FromRgba( 0, 255, 95, 1f ), // Green
+        ChartColor.FromRgba( 60, 100, 200, 1f ), // Blue
+        ChartColor.FromRgba( 200, 255, 60, 1f ), // Yellow
+        ChartColor.FromRgba( 255, 100, 60, 1f ), // Orange
+        ChartColor.FromRgba( 255, 0, 0, 1f ), // Red
+        ChartColor.FromRgba( 115, 0, 0, 1f ), // Dark Red
+        ChartColor.FromRgba( 0, 0, 0, 1f ) }; // Black
 
     List<int> RandomizeData()
     {
