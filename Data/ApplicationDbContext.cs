@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Blazor5._0.Data
+namespace SpeciesWeb.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
