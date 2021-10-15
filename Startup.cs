@@ -11,7 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
-using SpeciesWeb.Areas.Identity;
 using SpeciesWeb.Data;
 
 namespace SpeciesWeb
