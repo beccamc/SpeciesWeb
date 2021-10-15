@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
+using Blazorise;
+using Blazorise.Bootstrap;
+using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
+using Microsoft.VisualStudio.Web.BrowserLink;
 using SpeciesWeb.Data;
 
 namespace SpeciesWeb
@@ -28,7 +32,11 @@ namespace SpeciesWeb
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            IMvcBuilder builder = services.AddRazorPages();
+
+            #if DEBUG
+            builder.AddRazorRuntimeCompilation();
+            #endif
 
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
@@ -46,6 +54,14 @@ namespace SpeciesWeb
 
             // This is the setup for the prompt allowing user to share their info with us
             services.AddServerSideBlazor().AddMicrosoftIdentityConsentHandler();
+          
+            services
+              .AddBlazorise(options =>
+              {
+                  options.ChangeTextOnKeyPress = true; // optional
+                  })
+              .AddBootstrapProviders()
+              .AddFontAwesomeIcons();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +70,8 @@ namespace SpeciesWeb
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
+                
             }
             else
             {
