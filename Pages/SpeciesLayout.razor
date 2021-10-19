@@ -1,0 +1,63 @@
+﻿@page "/specieslayout"
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Species</a></li>
+        <li class="breadcrumb-item"><a href="#">Mammals</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Manatee</li>
+    </ol>
+</nav>
+
+<h1>Manatee</h1>
+<img class="img-fluid species-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Mother_manatee_and_calf.jpg/1920px-Mother_manatee_and_calf.jpg" alt="a photo of a Manatee">
+
+<h2>Description</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+<h2>Location</h2>
+<iframe id="inlineFrameExample"
+        title="Inline Frame Example"
+        width="600"
+        height="300"
+        class="embed-responsive"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=-0.004017949104309083%2C51.47612752641776%2C0.00030577182769775396%2C51.478569861898606&layer=mapnik">
+</iframe>
+
+
+<div class="d-flex">
+    <h2 class="p-2">Information</h2>
+    @*<svg class="icon ml-auto p-2" viewBox="0 0 8 8"><use class="icon-download-btn" xlink:href="#data-transfer-download"></use></svg>*@
+    <button type="button" class="ml-auto p-2 btn btn-primary">Download</button>
+    <button type="button" class="p-2 btn btn-warning">Edit</button>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>twitter</td>
+        </tr>
+    </tbody>
+</table>

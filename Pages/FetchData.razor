@@ -1,0 +1,53 @@
+@page "/fetchdata"
+@using SpeciesWeb.Data
+@inject SpeciesDataService SpeciesService
+
+
+<h1>Species data</h1>
+<p>This component demonstrates fetching data from a service.</p>
+
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <AuthorizeView>
+        <Authorized>
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th>CommonName</th>
+                      <th>Taxonomy</th>
+                      <th>Kingdom</th>
+                      <th>PopulationSize</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  @foreach (var forecast in forecasts)
+                  {
+                      <tr>
+                          <td>@forecast.CommonName</td>
+                          <td>@forecast.Taxonomy</td>
+                          <td>@forecast.Kingdom</td>
+                          <td>@forecast.PopulationSize</td>
+                      </tr>
+                  }
+              </tbody>
+          </table>
+        </Authorized>
+        <NotAuthorized>
+            <p>Not authorized. Please log in.</p>
+        </NotAuthorized>
+    </AuthorizeView>
+}
+
+@code {
+    private List<SpeciesData> forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await SpeciesService.GetDataAsync();
+    }
+}

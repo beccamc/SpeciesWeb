@@ -1,0 +1,162 @@
+﻿@page "/"
+
+<div class="container-fluid">
+    <div class="row mb-5">
+        <div class="col-lg-6 offset-lg-3" align="center">
+            <img alt="Center of Biological Diversity logo." class="img-fluid" src="/images/CBD_logo.png" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3" align="center">
+            <form>
+                <div class="mb-2">
+                    <input type="text" class="form-control" id="homepageSearchBar" aria-describedby="searchBar" placeholder="Search">
+                </div>
+                <div class="col text-center">
+                    <button type="submit" class="btn btn-primary m-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg> Search
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row m-5">
+        <div class="col-lg-10 offset-lg-1">
+            <div class="row">
+                <div class="col-lg-6 mt-2">
+                    <Card>
+                        <CardHeader>
+                            <CardTitle Size="6">Species Groups</CardTitle>
+                        </CardHeader>
+                        <CardBody>
+                            <PieChart @ref="speciesGroups" TItem="int"/>
+                        </CardBody>
+                    </Card>
+                </div>
+                <div class="col-lg-6 mt-2">
+                    <Card>
+                        <CardHeader>
+                            <CardTitle Size="6">IUCN Classifications</CardTitle>
+                        </CardHeader>
+                        <CardBody>
+                            <PieChart @ref="iucnClassifications" TItem="int"/>
+                        </CardBody>
+                    </Card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code{
+    PieChart<int> speciesGroups;
+    PieChart<int> iucnClassifications;
+
+    protected override async Task OnAfterRenderAsync( bool firstRender )
+    {
+        if ( firstRender )
+        {
+            await HandleRedraw();
+        }
+        
+    }
+
+    async Task HandleRedraw()
+    {
+        await speciesGroups.Clear();
+        await iucnClassifications.Clear();
+
+        await speciesGroups.AddLabelsDatasetsAndUpdate( groupLabels, GetSpeciesDataset());
+        await iucnClassifications.AddLabelsDatasetsAndUpdate(iucnLabels, GetIucnDataset());
+
+        Legend legendOptions = new Legend
+        {
+            Display = false,
+            Reverse = false,
+            FullWidth = true,
+        };
+
+        await speciesGroups.SetOptions(new PieChartOptions
+        {
+            Legend = legendOptions,
+        });
+
+        await iucnClassifications.SetOptions(new PieChartOptions
+        {
+            Legend = legendOptions,
+        });
+
+        await speciesGroups.Update();
+        await iucnClassifications.Update();
+    }
+
+    PieChartDataset<int> GetSpeciesDataset()
+    {
+        // TODO: Return an acutal dataset
+        return new PieChartDataset<int>
+        {
+            Label = "Species in Database",
+            Data = RandomizeData(),
+            BackgroundColor = speciesBackgroundColors,
+            BorderColor = speciesBorderColors,
+        };
+    }
+
+    PieChartDataset<int> GetIucnDataset()
+    {
+        // TODO: Return an actual dataset
+        return new PieChartDataset<int>
+        {
+            Label = "Species by IUCN Classification",
+            Data = RandomizeData(),
+            BackgroundColor = iucnBackgroundColors,
+            BorderColor = iucnBorderColors
+        };
+    }
+
+    string[] groupLabels = { "Amphibians", "Birds", "Fish", "Invertebrates", "Mammals", "Plants", "Reptiles" };
+        List<string> speciesBackgroundColors = new List<string> { 
+        ChartColor.FromRgba( 255, 255, 60, 0.2f ), // Yellow
+        ChartColor.FromRgba( 255, 175, 60, 0.2f ), // Orange
+        ChartColor.FromRgba( 60, 100, 200, 0.2f ), // Blue
+        ChartColor.FromRgba( 255, 0, 0, 0.2f ), // Red
+        ChartColor.FromRgba( 100, 100, 0, 0.2f ), // Dark Red
+        ChartColor.FromRgba( 0, 255, 95, 0.2f ), // Green
+        ChartColor.FromRgba( 0, 0, 0, 0.2f ) }; // Black
+    List<string> speciesBorderColors = new List<string> { 
+        ChartColor.FromRgba( 200, 255, 60, 1f ), // Yellow
+        ChartColor.FromRgba( 255, 100, 60, 1f ), // Orange
+        ChartColor.FromRgba( 60, 100, 200, 1f ), // Blue
+        ChartColor.FromRgba( 255, 0, 0, 1f ), // Red
+        ChartColor.FromRgba( 100, 100, 0, 1f ), // Dark Red
+        ChartColor.FromRgba( 0, 255, 95, 1f ), // Green
+        ChartColor.FromRgba( 0, 0, 0, 1f ) }; // Black
+
+
+    string[] iucnLabels = { "Least Concern", "Near Threatened", "Vulnerable", "Endangered", "Critically Endangered", "Extinct in the Wild", "Extinct" };
+    List<string> iucnBackgroundColors = new List<string> { 
+        ChartColor.FromRgba( 0, 255, 95, 0.2f ), // Green
+        ChartColor.FromRgba( 60, 100, 200, 0.2f ), // Blue
+        ChartColor.FromRgba( 255, 255, 60, 0.2f ), // Yellow
+        ChartColor.FromRgba( 255, 175, 60, 0.2f ), // Orange
+        ChartColor.FromRgba( 255, 0, 0, 0.2f ), // Red
+        ChartColor.FromRgba( 115, 0, 0, 0.2f ), // Dark Red
+        ChartColor.FromRgba( 0, 0, 0, 0.2f ) }; // Black
+    List<string> iucnBorderColors = new List<string> { 
+        ChartColor.FromRgba( 0, 255, 95, 1f ), // Green
+        ChartColor.FromRgba( 60, 100, 200, 1f ), // Blue
+        ChartColor.FromRgba( 200, 255, 60, 1f ), // Yellow
+        ChartColor.FromRgba( 255, 100, 60, 1f ), // Orange
+        ChartColor.FromRgba( 255, 0, 0, 1f ), // Red
+        ChartColor.FromRgba( 115, 0, 0, 1f ), // Dark Red
+        ChartColor.FromRgba( 0, 0, 0, 1f ) }; // Black
+
+    List<int> RandomizeData()
+    {
+        var r = new Random( DateTime.Now.Millisecond );
+
+        return new List<int> { r.Next( 3, 50 ), r.Next( 3, 50 ), r.Next( 3, 50 ), r.Next( 3, 50 ), r.Next( 3, 50 ), r.Next( 3, 50 ), r.Next( 3, 50 ) };
+    }
+}

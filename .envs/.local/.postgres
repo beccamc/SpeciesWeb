@@ -1,7 +1,0 @@
-# PostgreSQL
-# ------------------------------------------------------------------------------
-POSTGRES_HOST=postgres
-POSTGRES_PORT=5432
-POSTGRES_DB=speciesweb
-POSTGRES_USER=tSNFYMmFaumDtCQUgECAxqhhSYxNydSw
-POSTGRES_PASSWORD=h3qbyAVO4bFNGvHVvOENrxrAMTozU5SvajjRTaqXHZt4pG2MUsOnGFMAycMXbfTL
