@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.BrowserLink;
 using SpeciesWeb.Data;
 using System;
@@ -37,8 +38,9 @@ namespace SpeciesWeb
             #endif
 
             services.AddServerSideBlazor();
+            services.AddScoped<SpeciesDataService>();
+            services.AddDbContextPool<SpeciesDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSingleton<WeatherForecastService>();
-
             services
               .AddBlazorise(options =>
               {

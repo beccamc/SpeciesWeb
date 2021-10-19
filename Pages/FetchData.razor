@@ -1,9 +1,9 @@
 ﻿@page "/fetchdata"
 
 @using SpeciesWeb.Data
-@inject WeatherForecastService ForecastService
+@inject SpeciesDataService SpeciesService
 
-<h1>Weather forecast</h1>
+<h1>Species Data</h1>
 
 <p>This component demonstrates fetching data from a service.</p>
 
@@ -16,20 +16,20 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <th>CommonName</th>
+                <th>Taxonomy</th>
+                <th>Kingdom</th>
+                <th>PopulationSize</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var forecast in forecasts)
             {
                 <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
+                    <td>@forecast.CommonName</td>
+                    <td>@forecast.Taxonomy</td>
+                    <td>@forecast.Kingdom</td>
+                    <td>@forecast.PopulationSize</td>
                 </tr>
             }
         </tbody>
@@ -37,10 +37,10 @@ else
 }
 
 @code {
-    private WeatherForecast[] forecasts;
+    private List<SpeciesData> forecasts;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+        forecasts = await SpeciesService.GetDataAsync();
     }
 }
