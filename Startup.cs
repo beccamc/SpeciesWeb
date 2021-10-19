@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.BrowserLink;
 using SpeciesWeb.Data;
 
 namespace SpeciesWeb
@@ -33,8 +35,10 @@ namespace SpeciesWeb
             #endif
 
             services.AddServerSideBlazor();
+            services.AddScoped<SpeciesDataService>();
+            services.AddDbContextPool<SpeciesDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSingleton<WeatherForecastService>();
-
+          
             services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
                 .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAdB2C"));
 
